@@ -10,14 +10,23 @@ public class SelectionSort implements Sort {
     public void sort(ArrayList<Integer> arr) {
         changeCnt = 0;
         for (int i = 0; i < arr.size(); i++) {
+            int min = arr.get(i);
+            int minIdx = i;
             for (int j = i + 1; j < arr.size(); j++) {
-                if (arr.get(i) > arr.get(j)) {
-                    changeCnt++;
-                    int temp = arr.get(i);
-                    arr.set(i, arr.get(j));
-                    arr.set(j, temp);
+                if (min > arr.get(j)) { // 기록만
+                    min = arr.get(j);
+                    minIdx = j;
                 }
             }
+
+            // 가장 작은 것만 교체
+            if (minIdx != i) {
+                int temp = arr.get(i);
+                arr.set(i, arr.get(minIdx));
+                arr.set(minIdx, temp);
+                changeCnt++;
+            }
+
         }
     }
 
