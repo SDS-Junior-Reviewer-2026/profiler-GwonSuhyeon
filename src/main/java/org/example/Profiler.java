@@ -17,23 +17,27 @@ public class Profiler {
 
     /**
      * Sort Library를 세팅
-     * @param _lib Sort 인터페이스의 Library
+     * @param _name sort library 이름
      */
-    public void setLib(Sort _lib){
-        sort = _lib;
+    public void setLib(String _name){
+        if (_name == "bubbleSort") sort = new BubbleSort();
+        else if (_name == "selectionSort") sort = new SelectionSort();
+        else sort = null;
     }
 
     /**
      * Library를 동작시킴
      */
     public void runLib(){
-        sort.sort(data);
+        if (sort != null) sort.sort(data);
+        else System.out.println("해당 Sort 함수는 없어요.");
     }
 
     /**
      * Sort 결과와, Swap 횟수를 출력
      */
     public void showResult(){
+        if (sort == null) return;
         System.out.println("정렬결과:" + Arrays.toString(data.toArray()));
         System.out.println("swap횟수:" + sort.getChangeCnt());
     }
